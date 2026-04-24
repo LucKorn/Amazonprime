@@ -1,18 +1,15 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="light" backgroundColor="#000" />
+    <View style={styles.container}>
       <WebView 
         source={{ uri: 'https://www.primevideo.com' }} 
-        style={{ flex: 1 }}
-        startInLoadingState={true}
+        style={{ flex: 1 }} 
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
