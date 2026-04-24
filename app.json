@@ -1,21 +1,14 @@
 {
   "expo": {
-    "name": "Prime Lite",
-    "slug": "prime-lite",
+    "name": "Amazonprime",
+    "slug": "amazonprime",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#000000"
-    },
     "android": {
-      "package": "com.lucianokorn.primelite",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#000000"
+      "package": "com.lkorn.amazonprime"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "661e1e9d-a0d8-411d-a8b6-9aea7b0292cd7"
       }
     }
   }
