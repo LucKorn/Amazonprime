@@ -3,8 +3,13 @@
     "name": "Amazonprime",
     "slug": "amazonprime",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
     "android": {
-      "package": "com.lkorn.amazonprime"
+      "package": "com.lkorn.amazonprime",
+      "adaptiveIcon": {
+        "backgroundColor": "#000000"
+      }
     },
     "extra": {
       "eas": {
