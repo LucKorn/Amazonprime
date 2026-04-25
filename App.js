@@ -1,16 +1,16 @@
 import React, { useRef, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, StatusBar, BackHandler, Platform } from 'react-native';
+import { StyleSheet, SafeAreaView, StatusBar, BackHandler } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 export default function App() {
   const webViewRef = useRef(null);
 
-  // Faz o botão "Voltar" do celular funcionar dentro do site
+  // Mantém o botão "Voltar" físico do Android funcionando
   useEffect(() => {
     const onBackPress = () => {
       if (webViewRef.current) {
         webViewRef.current.goBack();
-        return true; // Impede o app de fechar
+        return true;
       }
       return false;
     };
@@ -19,8 +19,8 @@ export default function App() {
     return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
   }, []);
 
-  // UserAgent de um Chrome moderno para evitar o erro de "versão incompatível"
-  const chromeUserAgent = "Mozilla/5.0 (Linux; Android 13; SM-S918B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36";
+  // Disfarce de iPad Pro (tenta forçar o player web da Apple, que é mais tolerante)
+  const ipadUserAgent = "Mozilla/5.0 (iPad; CPU OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1";
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,7 +34,7 @@ export default function App() {
         allowsFullscreenVideo={true}
         allowsInlineMediaPlayback={true}
         mediaPlaybackRequiresUserAction={false}
-        userAgent={chromeUserAgent}
+        userAgent={ipadUserAgent}
         originWhitelist={['*']}
       />
     </SafeAreaView>
