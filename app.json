@@ -3,7 +3,7 @@
     "name": "Amazonprime",
     "slug": "amazonprime",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "userInterfaceStyle": "light",
     "splash": {
       "backgroundColor": "#ffffff"
@@ -20,7 +20,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "661e1e9d-a0d8-411d-a8b6-9aea7b0292cd"
+        "projectId": "SEU_PROJECT_ID_AQUI"
       }
     }
   }
