@@ -1,15 +1,32 @@
-import React from 'react';
-import { StyleSheet, SafeAreaView, StatusBar, Platform } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { StyleSheet, SafeAreaView, StatusBar, BackHandler, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 export default function App() {
-  // UserAgent de um navegador Chrome no Windows para "forçar" o modo desktop
-  const desktopUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36";
+  const webViewRef = useRef(null);
+
+  // Faz o botão "Voltar" do celular funcionar dentro do site
+  useEffect(() => {
+    const onBackPress = () => {
+      if (webViewRef.current) {
+        webViewRef.current.goBack();
+        return true; // Impede o app de fechar
+      }
+      return false;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+  }, []);
+
+  // UserAgent de um Chrome moderno para evitar o erro de "versão incompatível"
+  const chromeUserAgent = "Mozilla/5.0 (Linux; Android 13; SM-S918B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36";
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden={true} />
       <WebView 
+        ref={webViewRef}
         source={{ uri: 'https://www.primevideo.com' }} 
         style={{ flex: 1 }}
         javaScriptEnabled={true}
@@ -17,19 +34,13 @@ export default function App() {
         allowsFullscreenVideo={true}
         allowsInlineMediaPlayback={true}
         mediaPlaybackRequiresUserAction={false}
-        userAgent={desktopUserAgent}
-        // Estas linhas abaixo ajudam a evitar que o site redirecione para a Play Store
+        userAgent={chromeUserAgent}
         originWhitelist={['*']}
-        mixedContentMode="always"
       />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
+  container: { flex: 1, backgroundColor: '#000' },
 });
-          
