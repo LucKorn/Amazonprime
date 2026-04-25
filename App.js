@@ -1,46 +1,48 @@
-import React, { useRef, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, StatusBar, BackHandler } from 'react-native';
-import { WebView } from 'react-native-webview';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, TouchableOpacity, Text, StatusBar } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 
 export default function App() {
-  const webViewRef = useRef(null);
+  
+  // Função para abrir o Prime Video no motor do Chrome
+  const abrirPrime = async () => {
+    await WebBrowser.openBrowserAsync('https://www.primevideo.com', {
+      toolbarColor: '#000000', // Cor da barra superior
+      enableBarCollapsing: true, // Esconde a barra ao rolar
+      showTitle: false,
+    });
+  };
 
-  // Mantém o botão "Voltar" físico do Android funcionando
+  // Abre automaticamente assim que o app inicia
   useEffect(() => {
-    const onBackPress = () => {
-      if (webViewRef.current) {
-        webViewRef.current.goBack();
-        return true;
-      }
-      return false;
-    };
-
-    BackHandler.addEventListener('hardwareBackPress', onBackPress);
-    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    abrirPrime();
   }, []);
 
-  // Disfarce de iPad Pro (tenta forçar o player web da Apple, que é mais tolerante)
-  const ipadUserAgent = "Mozilla/5.0 (iPad; CPU OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1";
-
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar hidden={true} />
-      <WebView 
-        ref={webViewRef}
-        source={{ uri: 'https://www.primevideo.com' }} 
-        style={{ flex: 1 }}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        allowsFullscreenVideo={true}
-        allowsInlineMediaPlayback={true}
-        mediaPlaybackRequiresUserAction={false}
-        userAgent={ipadUserAgent}
-        originWhitelist={['*']}
-      />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
+      <TouchableOpacity style={styles.button} onPress={abrirPrime}>
+        <Text style={styles.text}>Abrir Prime Video</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#000' },
+  container: {
+    flex: 1,
+    backgroundColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#00a8e1',
+    padding: 15,
+    borderRadius: 8,
+  },
+  text: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
 });
