@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Amazonprime",
-    "slug": "Amazonprime",
+    "slug": "amazonprime",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
