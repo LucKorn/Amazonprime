@@ -1,8 +1,11 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import { StyleSheet, SafeAreaView, StatusBar, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 export default function App() {
+  // UserAgent de um navegador Chrome no Windows para "forçar" o modo desktop
+  const desktopUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36";
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden={true} />
@@ -14,8 +17,10 @@ export default function App() {
         allowsFullscreenVideo={true}
         allowsInlineMediaPlayback={true}
         mediaPlaybackRequiresUserAction={false}
+        userAgent={desktopUserAgent}
+        // Estas linhas abaixo ajudam a evitar que o site redirecione para a Play Store
         originWhitelist={['*']}
-        userAgent="Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36"
+        mixedContentMode="always"
       />
     </SafeAreaView>
   );
