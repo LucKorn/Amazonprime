@@ -1,15 +1,23 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, SafeAreaView, StatusBar } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" />
       <WebView 
         source={{ uri: 'https://www.primevideo.com' }} 
-        style={{ flex: 1 }} 
+        style={{ flex: 1 }}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        allowsFullscreenVideo={true}
+        allowsInlineMediaPlayback={true}
+        mediaPlaybackRequiresUserAction={false}
+        originWhitelist={['*']}
+        userAgent="Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
