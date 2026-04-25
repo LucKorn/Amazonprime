@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, StatusBar } from 'react-native';
+import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar hidden={true} />
       <WebView 
         source={{ uri: 'https://www.primevideo.com' }} 
         style={{ flex: 1 }}
@@ -15,7 +15,7 @@ export default function App() {
         allowsInlineMediaPlayback={true}
         mediaPlaybackRequiresUserAction={false}
         originWhitelist={['*']}
-        userAgent="Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
+        userAgent="Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36"
       />
     </SafeAreaView>
   );
@@ -27,3 +27,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
 });
+          
